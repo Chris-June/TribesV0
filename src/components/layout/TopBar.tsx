@@ -38,10 +38,17 @@ export default function TopBar() {
             onClick={() => setAiAssistantOpen(true)}
           >
             <Bot className="h-5 w-5" />
+            <span className="sr-only">AI Assistant</span>
           </Button>
 
-          <Button variant="ghost" size="icon">
+          <Button 
+            variant="ghost" 
+            size="icon"
+            disabled
+            title="Notifications coming soon"
+          >
             <Bell className="h-5 w-5" />
+            <span className="sr-only">Notifications</span>
           </Button>
 
           <DropdownMenu>

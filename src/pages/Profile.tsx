@@ -15,7 +15,15 @@ import {
   Mail,
   MapPin,
   Calendar,
+  
 } from 'lucide-react';
+import { ActivityMetrics } from "@/components/profile/ActivityMetrics";
+import { ExpertiseIndicators } from "@/components/profile/ExpertiseIndicators";
+import { CommunityRecognitionCard } from "@/components/profile/CommunityRecognition";
+import { NetworkAnalysisCard } from "@/components/profile/NetworkAnalysis";
+import { mockActivityMetrics, mockEngagementStats, mockExpertiseMetrics } from "@/mocks/engagementMocks";
+import { mockCommunityRecognition } from "@/mocks/recognitionMocks";
+import { mockNetworkAnalysis } from "@/mocks/networkMocks";
 
 const stats = [
   {
@@ -88,7 +96,7 @@ export default function Profile() {
                     </div>
                     <div className="flex items-center gap-1">
                       <MapPin className="h-4 w-4" />
-                      San Francisco, CA
+                      Chatham-Kent, On., Canada
                     </div>
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
@@ -106,9 +114,11 @@ export default function Profile() {
                   <Badge>Tech Enthusiast</Badge>
                 </div>
                 <div className="flex gap-2 justify-center md:justify-start">
-                  <Button variant="outline" size="sm">
-                    <LinkIcon className="h-4 w-4 mr-2" />
-                    Website
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://home.intellisyncsolutions.io" target="_blank" rel="noopener noreferrer">
+                      <LinkIcon className="h-4 w-4 mr-2" />
+                      Website
+                    </a>
                   </Button>
                   <Button variant="outline" size="sm">
                     Edit Profile
@@ -134,11 +144,31 @@ export default function Profile() {
 
         {/* Tabs Content */}
         <Tabs defaultValue="activity" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="activity">Activity</TabsTrigger>
             <TabsTrigger value="tribes">Tribes</TabsTrigger>
             <TabsTrigger value="media">Media</TabsTrigger>
+            <TabsTrigger value="metrics">Metrics</TabsTrigger>
+            <TabsTrigger value="expertise">Expertise</TabsTrigger>
+            <TabsTrigger value="recognition">Recognition</TabsTrigger>
+            <TabsTrigger value="network">Network</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="network">
+            <NetworkAnalysisCard data={mockNetworkAnalysis} />
+          </TabsContent>
+
+          <TabsContent value="recognition">
+            <CommunityRecognitionCard data={mockCommunityRecognition} />
+          </TabsContent>
+
+          <TabsContent value="expertise">
+            <ExpertiseIndicators metrics={mockExpertiseMetrics} />
+          </TabsContent>
+
+          <TabsContent value="metrics">
+            <ActivityMetrics metrics={mockActivityMetrics} stats={mockEngagementStats} />
+          </TabsContent>
 
           <TabsContent value="activity">
             <Card>

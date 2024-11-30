@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, Shield, Users, Bot, MessageSquare, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import AuthDialog from '@/components/auth/AuthDialog';
 
 const features = [
   {
@@ -38,17 +38,11 @@ const features = [
 ];
 
 export default function Landing() {
-  const [authDialogOpen, setAuthDialogOpen] = useState(false);
-  const [authView, setAuthView] = useState<'signin' | 'signup'>('signup');
+  const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    setAuthView('signup');
-    setAuthDialogOpen(true);
-  };
-
-  const handleSignIn = () => {
-    setAuthView('signin');
-    setAuthDialogOpen(true);
+    // Bypass auth for testing and go directly to app home
+    navigate('/app');
   };
 
   return (
@@ -87,7 +81,7 @@ export default function Landing() {
                 size="lg" 
                 variant="outline" 
                 className="text-lg border-indigo-200/20 hover:bg-indigo-200/10"
-                onClick={handleSignIn}
+                onClick={handleGetStarted}
               >
                 Sign In
               </Button>
@@ -164,12 +158,6 @@ export default function Landing() {
           </motion.div>
         </div>
       </div>
-
-      <AuthDialog 
-        open={authDialogOpen} 
-        onOpenChange={setAuthDialogOpen}
-        defaultView={authView}
-      />
     </div>
   );
 }
